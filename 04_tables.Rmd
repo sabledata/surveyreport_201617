@@ -90,19 +90,20 @@
 ```{r table3,  echo=FALSE}
 
   options(knitr.kable.NA = '')
-  dtSP   <- paste("exec procRReport_SpeciesSummary ",yr," ,'StRS'",sep="")
-  #datSP  <- GetSQLData(dtSP,"Sablefish")
-  datSP   <-  read.csv("c:/github/surveyreport/standaloneData/table3.csv",header=T)
+  report.species   <- paste("exec procRReport_SpeciesSummary ",yr," ,'StRS'",sep="")
+  species.summary  <- GetSQLData(report.species,"Sablefish")
+  write.table(species.summary, file = paste(path,"table03.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
+  species.summary   <-  read.csv(paste(path,'table03.csv',sep=''), header=T)
      
-  dat1SP <- datSP[,c(-1)] 
-  dat1SP <- dat1SP[,c(-3)]
-  dat1SP <- dat1SP[,c(-2)]
-  dat1SP <- dat1SP[,c(-6)]
-  cleandataSP<-dat1SP
-  cleandataSP$Summary_sp <- cleanf(cleandataSP$Summary_sp)  #use the remove duplicates function
-  colnames(cleandataSP)  <- c( "Category", "Common Name", "Scientific Name" , "Count", "Weight(kg)")
+  species.summary1 <- species.summary[,c(-1)] 
+  species.summary1 <- species.summary1[,c(-3)]
+  species.summary1 <- species.summary1[,c(-2)]
+  species.summary1 <- species.summary1[,c(-6)]
+  cleandata.summary<- species.summary1
+  cleandata.summary$Summary_sp <- cleanf(cleandata.summary$Summary_sp)  #use the remove duplicates function
+  colnames(cleandata.summary)  <- c( "Category", "Common Name", "Scientific Name" , "Count", "Weight(kg)")
   
-  kableExtra::kable(cleandataSP,
+  kableExtra::kable(cleandata.summary,
                     booktabs = TRUE,linesep = "",
                     format = "latex",  caption = "(ref:Table3Caption)") %>%
                     row_spec(10,  hline_after = T) %>%
@@ -120,19 +121,20 @@
 ```{r table4, echo=FALSE}
 
   options(knitr.kable.NA = '')
-  dtSP   <- paste("exec procRReport_SpeciesSummary ",yr," ,'INLET STANDARDIZED'",sep="")
-  #datSP  <- GetSQLData(dtSP,"Sablefish")
-  datSP   <-  read.csv("c:/github/surveyreport/standaloneData/table4.csv",header=T)
+  report.species   <-  paste("exec procRReport_SpeciesSummary ",yr," ,'INLET STANDARDIZED'",sep="")
+  species.summary  <-  GetSQLData(report.species ,"Sablefish")
+  write.table(species.summary, file = paste(path,"table04.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
+  species.summary  <-  read.csv(paste(path,'table04.csv',sep=''), header=T)
   
-  dat1SP <- datSP[,c(-1)] 
-  dat1SP <- dat1SP[,c(-3)]
-  dat1SP <- dat1SP[,c(-2)]
-  dat1SP <- dat1SP[,c(-6)]
-  cleandataSPi<-dat1SP
-  cleandataSPi$Summary_sp <- cleanf(cleandataSPi$Summary_sp)  #use the remove duplicates function
-  colnames(cleandataSPi)  <- c( "Category", "Common Name", "Scientific Name" , "Count", "Weight(kg)")
+  species.summary1 <- species.summary[,c(-1)] 
+  species.summary1 <- species.summary1[,c(-3)]
+  species.summary1 <- species.summary1[,c(-2)]
+  species.summary1 <- species.summary1[,c(-6)]
+  cleandata.summary<- species.summary1
+  cleandata.summary$Summary_sp <- cleanf(cleandata.summary$Summary_sp)  #use the remove duplicates function
+  colnames(cleandata.summary)  <- c( "Category", "Common Name", "Scientific Name" , "Count", "Weight(kg)")
 
-  kableExtra::kable(cleandataSPi,
+  kableExtra::kable(cleandata.summary,
                     booktabs = TRUE,linesep = "",
                     format = "latex",  caption = "(ref:Table4Caption)") %>%
                     row_spec(2,  hline_after = T) %>%
@@ -150,19 +152,20 @@
 ```{r table5,  echo=FALSE}
 
   options(knitr.kable.NA = '')
-  dtSP   <- paste("exec procRReport_SpeciesSummary ", yr+1," ,'StRS'",sep="")
-  #datSP  <- GetSQLData(dtSP,"Sablefish")
-  datSP   <-  read.csv("c:/github/surveyreport/standaloneData/table5.csv",header=T)
+  report.species   <- paste("exec procRReport_SpeciesSummary ", yr+1," ,'StRS'",sep="")
+  species.summary  <- GetSQLData(report.species ,"Sablefish")
+  write.table(species.summary, file = paste(path,"table05.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
+  species.summary   <- read.csv(paste(path,'table05.csv',sep=''), header=T)
   
-  dat1SP <- datSP[,c(-1)] 
-  dat1SP <- dat1SP[,c(-3)]
-  dat1SP <- dat1SP[,c(-2)]
-  dat1SP <- dat1SP[,c(-6)]
-  cleandataSP2<-dat1SP
-  cleandataSP2$Summary_sp <- cleanf(cleandataSP2$Summary_sp)  #use the remove duplicates function
-  colnames(cleandataSP2)  <- c( "Category", "Common Name", "Scientific Name" , "Count", "Weight(kg)")
+  species.summary1 <- species.summary[,c(-1)] 
+  species.summary1 <- species.summary1[,c(-3)]
+  species.summary1 <- species.summary1[,c(-2)]
+  species.summary1 <- species.summary1[,c(-6)]
+  cleandata.summary<- species.summary1
+  cleandata.summary$Summary_sp <- cleanf(cleandata.summary$Summary_sp)  #use the remove duplicates function
+  colnames(cleandata.summary)  <- c( "Category", "Common Name", "Scientific Name" , "Count", "Weight(kg)")
 
-  kableExtra::kable(cleandataSP2,
+  kableExtra::kable(cleandata.summary,
               booktabs = TRUE,linesep = "",
               format = "latex",  caption = "(ref:Table5Caption)") %>%
               row_spec(11,  hline_after = T) %>%
@@ -179,19 +182,20 @@
 ```{r table6, echo=FALSE}
 
   options(knitr.kable.NA = '')
-  dtSP   <- paste("exec procRReport_SpeciesSummary ",yr+1," ,'INLET STANDARDIZED'",sep="")
-  #datSP  <- GetSQLData(dtSP,"Sablefish")
-  datSP   <-  read.csv("c:/github/surveyreport/standaloneData/table6.csv",header=T)
+  report.species   <- paste("exec procRReport_SpeciesSummary ",yr+1," ,'INLET STANDARDIZED'",sep="")
+  species.summary  <- GetSQLData(report.species ,"Sablefish")
+  write.table(species.summary, file = paste(path,"table06.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
+  species.summary   <- read.csv(paste(path,'table06.csv',sep=''), header=T)
   
-  dat1SP <- datSP[,c(-1)] 
-  dat1SP <- dat1SP[,c(-3)]
-  dat1SP <- dat1SP[,c(-2)]
-  dat1SP <- dat1SP[,c(-6)]
-  cleandataSPi<-dat1SP
-  cleandataSPi$Summary_sp <- cleanf(cleandataSPi$Summary_sp)  #use the remove duplicates function
-  colnames(cleandataSPi)  <- c( "Category", "Common Name", "Scientific Name" , "Count", "Weight(kg)")
+  species.summary1 <- species.summary[,c(-1)] 
+  species.summary1 <- species.summary1[,c(-3)]
+  species.summary1 <- species.summary1[,c(-2)]
+  species.summary1 <- species.summary1[,c(-6)]
+  cleandata.summary<- species.summary1
+  cleandata.summary$Summary_sp <- cleanf(cleandata.summary$Summary_sp)  #use the remove duplicates function
+  colnames(cleandata.summary)  <- c( "Category", "Common Name", "Scientific Name" , "Count", "Weight(kg)")
 
-  kableExtra::kable(cleandataSPi,
+  kableExtra::kable(cleandata.summary,    # inlet species summary
                     booktabs = TRUE,linesep = "",
                     format = "latex",  caption = "(ref:Table6Caption)") %>%
                     row_spec(2,  hline_after = T) %>%
@@ -283,11 +287,11 @@
                   "Rec_2009 as [09], Rec_2010 as [10], Rec_2011 as [11], ",
                   "Rec_2012 as [12], Rec_2013 as [13], Rec_2014 as [14], ",
                   "Rec_2015 as [15], Rec_2016 as [16], Rec_2017 as [17], ",
-                  "Rec_2018 as [18], Rec_2019 as [19], ",
                   "Total_recovered as [Total], No_recovery_year as [No Year] ",
                   "from dbo.WEB_TAG_REVIEW order by [Release year]",sep="")
-   #datag <-  GetSQLData(dtBW,"FishTag")
-   datag   <-  read.csv("c:/github/surveyreport/standaloneData/table9.csv",header=T)
+   datag <-  GetSQLData(dtBW,"FishTag")
+   write.table(datag, file = paste(path,"table09.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
+   datag   <- read.csv(paste(path,'table09.csv',sep=''), header=T)
    
    names(datag)[3]     <-  "91"
    names(datag)[4]     <-  "92"
@@ -316,8 +320,6 @@
    names(datag)[27]    <-  "15" 
    names(datag)[28]    <-  "16" 
    names(datag)[29]    <-  "17"  
-   names(datag)[30]    <-  "18" 
-   names(datag)[31]    <-  "19"
    names(datag)[33]    <-  "no year" 
 
    

@@ -280,29 +280,29 @@ library(cowplot)
    tp          <- paste("select  ROUND(TRAP / TOTAL * 100, 0) AS TrapPer ",
                         "from    dbo.TableA2_Annual_sablefish_Landing_in_Can_waters_2 ",  
                         "where  (year = ", yr, ")  group by ROUND(TRAP / TOTAL * 100, 0), TOTAL", sep="")
-   trapP      <- GetSQLData(tp,"Sablefish")                     # -- trap gear catch ratio year 1
-   write.table(trapP, file = paste(path,"index03.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
+   #trapP      <- GetSQLData(tp,"Sablefish")                     # -- trap gear catch ratio year 1
+   #write.table(trapP, file = paste(path,"index03.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
    trapP      <- read.csv(paste(path,'index03.csv',sep=''), header=T)
    
    lp          <- paste("select  ROUND(LONGLINE / TOTAL * 100, 0) AS LonglinePer ",  
                          "from   dbo.TableA2_Annual_sablefish_Landing_in_Can_waters_2  ",
                          "where  (year = ", yr, ") group by ROUND(LONGLINE / TOTAL * 100, 0), TOTAL", sep="")
-   LonglineP  <- GetSQLData(lp,"Sablefish")                     # -- longline gear catch ratio year 1
-   write.table(LonglineP, file = paste(path,"index04.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
+   #LonglineP  <- GetSQLData(lp,"Sablefish")                     # -- longline gear catch ratio year 1
+   #write.table(LonglineP, file = paste(path,"index04.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
    LonglineP   <- read.csv(paste(path,'index04.csv',sep=''), header=T)
    
    tp2         <- paste("select  ROUND(TRAP / TOTAL * 100, 0) AS TrapPer ",
                         "from    dbo.TableA2_Annual_sablefish_Landing_in_Can_waters_2 ",  
                         "where  (year = ", yr + 1, ")  group by ROUND(TRAP / TOTAL * 100, 0), TOTAL", sep="")
-   trapP2     <- GetSQLData(tp2,"Sablefish")                     # -- trap gear catch ratio year 2
-   write.table(trapP2, file = paste(path,"index05.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
+   #trapP2     <- GetSQLData(tp2,"Sablefish")                     # -- trap gear catch ratio year 2
+   #write.table(trapP2, file = paste(path,"index05.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
    trapP2      <- read.csv(paste(path,'index05.csv',sep=''), header=T)
    
    lp2         <-  paste("select  ROUND(LONGLINE / TOTAL * 100, 0) AS LonglinePer  ",  
                          "from    dbo.TableA2_Annual_sablefish_Landing_in_Can_waters_2  ",
                          "where  (year = ", yr + 1, ") group by ROUND(LONGLINE / TOTAL * 100, 0), TOTAL", sep="")
-   LonglineP2 <- GetSQLData(lp2,"Sablefish")                     # -- longline gear catch ratio  year 2
-   write.table(LonglineP2, file = paste(path,"index06.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
+   #LonglineP2 <- GetSQLData(lp2,"Sablefish")                     # -- longline gear catch ratio  year 2
+   #write.table(LonglineP2, file = paste(path,"index06.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
    LonglineP2  <- read.csv(paste(path,'index06.csv',sep=''), header=T)
    
    # -- F I G U R E   C A P T I O N S  function ------------------------------------------------
