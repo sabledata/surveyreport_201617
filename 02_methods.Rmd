@@ -18,7 +18,7 @@ Standardized fishing sets under the traditional component of the survey have spe
 
 ## VESSELS
 
-The 2018 survey of `r setcnt` sets was chartered aboard the 35.66 meter F/V `r boat`, skippered by `r captain`  and Mike Derry between `r dates`, `r yr`. The `r yr+1` survey of `r setcnt2` sets was chartered aboard the 25.34 meter F/V `r boat2`, skippered by Albert (Deacon) Melnychuk between `r dates2`, `r yr+1` (Appendix \@ref(app:second-appendix)).  Images and information about the vessels can be found at [\underline{http://marinetraffic.com}](http://marinetraffic.com). 
+The `r yr` survey of `r set.count1` sets was chartered aboard the 35.66 meter F/V `r boat1`, skippered by `r captain1` between `r dates1`, `r yr`. The `r yr+1` survey of `r set.count2` sets was chartered aboard the 25.34 meter F/V `r boat2`, skippered by `r captain2` between `r dates2`, `r yr+1` (Appendix \@ref(app:second-appendix)).  Images and information about the vessels can be found at [\underline{http://marinetraffic.com}](http://marinetraffic.com). 
 
 ## FISHING GEAR
 
@@ -48,7 +48,7 @@ Catch by species from each trap was sorted into baskets by the crew. Baskets wer
 
 ### Sablefish Allocation Details
  
-Prior to 2018, sablefish were tagged from 1/3 of the traps on StRS sets and 1/2 of the traps on the inlet sets. Due to high catch numbers, the survey protocol was revised in 2018 to designate ~125 sablefish to be tagged (T) from 1/3 of the traps on all sets.  When catches were high, traps targeted for tagging were spread throughout the string to avoid tagging the first 125 fish.  A biological sample was collected from the coded "A" traps with the goal of selecting 50 to 60 fish.  If CPUE was high, the new survey protocol of 2018 designated a minimal of two traps to be used for samples.  If both traps contained more than 60 sablefish, a random process was used to select ~60 specimens.
+*** change this:  Prior to 2018, sablefish were tagged from 1/3 of the traps on StRS sets and 1/2 of the traps on the inlet sets. Due to high catch numbers, the survey protocol was revised in 2018 to designate ~125 sablefish to be tagged (T) from 1/3 of the traps on all sets.  When catches were high, traps targeted for tagging were spread throughout the string to avoid tagging the first 125 fish.  A biological sample was collected from the coded "A" traps with the goal of selecting 50 to 60 fish.  If CPUE was high, the new survey protocol of 2018 designated a minimal of two traps to be used for samples.  If both traps contained more than 60 sablefish, a random process was used to select ~60 specimens.
 
 The remaining traps were allocated to the discard category and sorted by size into either legal (D) or sublegal (SD) discards. The SD (sublegal discards) code was added during the 2017 survey to account for the large numbers of juvenile sablefish and facilitate their quick return to the ocean. Legal discards (D) of sablefish were kept by the vessel and processed as commercial catch. 
 
@@ -73,29 +73,32 @@ During survey years 1992 through 1997 and 2004, previously tagged sablefish were
 ```{r SensorText, echo=FALSE}
    # -- oceanographic sensor text:  determine the number of sets that deployed SBE and HOBO and CTD
 
-   sense  <-  paste("select Year, SUM(SBE39) AS SBE39, SUM(HOBO) AS HOBO, ",
+   sensr       <-   paste("select Year, SUM(SBE39) AS SBE39, SUM(HOBO) AS HOBO, ",
                     "SUM(CTD) AS CTD, SUM(CAM) AS CAM ",
                     "from     dbo.Report_SBE_HOBO_IND ",
                     "group by Year having (Year =", yr,")", sep="")
-   #sensor<-  GetSQLData(sense,"Sablefish")   # query SQL Server
-   sensor <-  read.csv("c:/github/surveyreport/standaloneData/methods1.csv",header=T)
+   sensor1     <-  GetSQLData(sensr,"Sablefish")   # query SQL Server
+   write.table(sensor1, file = paste(path,"methods01.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
+   sensor1     <-  read.csv(paste(path,'methods01.csv',sep=''), header=T)
+
    
-   sense2 <-  paste("select Year, SUM(SBE39) AS SBE39, SUM(HOBO) AS HOBO, ",
+   sensr2      <-   paste("select Year, SUM(SBE39) AS SBE39, SUM(HOBO) AS HOBO, ",
                     "SUM(CTD) AS CTD, SUM(CAM) AS CAM ",
                     "from     dbo.Report_SBE_HOBO_IND ",
                     "group by Year having (Year =", yr+1,")", sep="")
-  #sensor2<-  GetSQLData(sense2,"Sablefish")  # query SQL Server
-   sensor2<-  read.csv("c:/github/surveyreport/standaloneData/methods2.csv",header=T)
+   sensor2     <-  GetSQLData(sensr2,"Sablefish")  # query SQL Server
+   write.table(sensor2, file = paste(path,"methods02.csv",sep=''), row.names=FALSE, na="",col.names=TRUE,  sep=",")
+   sensor2     <-  read.csv(paste(path,'methods02.csv',sep=''), header=T)
  
 ```
 
 ## OCEANOGRAPHIC SENSOR DATA COLLECTION
 
-A Sea-bird Bird SBE 39 temperature and pressure logger was placed in a protective plastic pipe and attached to the inside of the middle or end traps.  Data was successfully collected from `r sensor[1,2]` sets in `r yr` (Appendix \@ref(app:third-appendix)) and `r sensor2[1,2]` sets in `r yr+1` (Appendix \@ref(app:fourth-appendix)).  A SBE 39 was also placed in the tagging tank on hauling days to record water temperature.   
+A Sea-bird Bird SBE 39 temperature and pressure logger was placed in a protective plastic pipe and attached to the inside of the middle or end traps.  Data was successfully collected from `r sensor1[1,2]` sets in `r yr` (Appendix \@ref(app:third-appendix)) and `r sensor2[1,2]` sets in `r yr+1` (Appendix \@ref(app:fourth-appendix)).  A SBE 39 was also placed in the tagging tank on hauling days to record water temperature.   
 
-In order to evaluate the impact of fishing gear on benthic habitat, Nuytco autonomous camera systems and HOBO Pendant G accelerometers were attached to traps to capture images and movement (2012 through 2017).  During the `r yr` and `r yr+1` surveys, only accelerometers were deployed.  Data was successfully collected from `r sensor[1,3]` sets in `r yr` (Appendix \@ref(app:third-appendix)) and `r sensor2[1,3]` sets in `r yr+1` (Appendix \@ref(app:fourth-appendix)). In addition, a single accelerometer was stationed just forward of the hauler post. 
+In order to evaluate the impact of fishing gear on benthic habitat, Nuytco autonomous camera systems and HOBO Pendant G accelerometers were attached to traps to capture images and movement (2012 through 2017).  During the `r yr` and `r yr+1` surveys, only accelerometers were deployed.  Data was successfully collected from `r sensor1[1,3]` sets in `r yr` (Appendix \@ref(app:third-appendix)) and `r sensor2[1,3]` sets in `r yr+1` (Appendix \@ref(app:fourth-appendix)). In addition, a single accelerometer was stationed just forward of the hauler post. 
 
-A Concerto CTD (conductivity, temperature and depth) sensor was placed inside the middle or end traps on `r sensor[1,4]` sets in `r yr` and `r sensor2[1,4]` sets in `r yr+1`.  Data from the accelerometers, CTD sensors, SBE temperature and pressure loggers were processed after the set was complete using tools on the GFBioField Upload Sensor Data form. 
+A Concerto CTD (conductivity, temperature and depth) sensor was placed inside the middle or end traps on `r sensor1[1,4]` sets in `r yr` and `r sensor2[1,4]` sets in `r yr+1`.  Data from the accelerometers, CTD sensors, SBE temperature and pressure loggers were processed after the set was complete using tools on the GFBioField Upload Sensor Data form. 
 
 ## ELECTRONIC MONITORING VIDEO DATA COLLECTION  
 
